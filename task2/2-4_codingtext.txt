@@ -1,0 +1,18 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(int a, int b) {
+    // a ⊕ b를 문자열로 변환하여 생성
+    string ab = to_string(a) + to_string(b);
+    // b ⊕ a를 문자열로 변환하여 생성
+    string ba = to_string(b) + to_string(a);
+    
+    // ab와 ba를 숫자로 변환
+    int ab_num = stoi(ab);
+    int ba_num = stoi(ba);
+    
+    // 더 큰 값을 반환, 만약 값이 같다면 그 값을 반환
+    return ab_num > ba_num ? ab_num : ba_num;
+}

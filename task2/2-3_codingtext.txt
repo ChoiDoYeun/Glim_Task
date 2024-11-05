@@ -1,0 +1,41 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+// 특정 문자열이 포함되어 있는지 확인하는 함수
+bool contains(const string& str, const string& substr) {
+    return str.find(substr) != string::npos;
+}
+
+int solution(vector<string> order) {
+    
+    // 각 메뉴의 가격 변수 초기화 및 가격 설정
+    const int americano_price = 4500;
+    const int cafe_latte_price = 5000;
+
+    // 총 결제 금액 변수 초기화
+    int total_price = 0;  
+
+    //* 예외처리 *//
+    
+    // 'order'길이 확인
+    if (order.size() < 1 || order.size() > 1000) {
+        return -1;  //에러코드 반환
+    }
+    
+    //* 가격계산 *//
+    
+    // 주문 목록 순회 (order수 만큼 반복하며 각 요소를 item에 담음)
+    for (string item : order) {
+        // itme에서 해당 항목(americano, cafelatte, anything)이 포함되거나 같은지 확인 -> 'contains'함수를 이용
+        if (contains(item, "americano") || item == "anything") {     
+            total_price += americano_price; // total_price에 해당 물품 가격 추가
+        }
+        else if (contains(item, "cafelatte")) {
+            total_price += cafe_latte_price;
+        }
+    }
+
+    return total_price;  // 최종 결제 금액 반환
+}

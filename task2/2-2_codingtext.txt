@@ -1,0 +1,55 @@
+#include <string>
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+// 영소문자로만 이루어졌는지 확인하는 함수
+bool isLowercaseString(const string& str) {
+    for (char ch : str) {
+        if (!islower(ch)) {  // 소문자인지 확인
+            return false;
+        }
+    }
+    return true;
+}
+
+int solution(string my_string, string is_prefix) {
+    //* 예외처리 *//
+    
+    // 문자열 길이 제한을 확인
+    if (my_string.length() < 1 || my_string.length() > 100) {
+        cerr << "Error: 'my_string' length must be between 1 and 100." << endl;
+        return -1;  // 에러코드 반환
+    }
+    
+    if (is_prefix.length() < 1 || is_prefix.length() > 100) {
+        cerr << "Error: 'is_prefix' length must be between 1 and 100." << endl;
+        return -2;  // 에러코드 반환
+    }
+    
+    // 영소문자로만 이루어졌는지 확인 -> 'isLowercaseString'함수를 활용
+    if (!isLowercaseString(my_string)) {
+        cerr << "Error: 'my_string' must contain only lowercase letters." << endl;
+        return -3;  // 에러코드 반환
+    }
+    
+    if (!isLowercaseString(is_prefix)) {
+        cerr << "Error: 'is_prefix' must contain only lowercase letters." << endl;
+        return -4;  // 에러코드 반환
+    }
+    
+    //* 접두사 확인 *//
+    
+    // is_prefix가 my_string보다 길면 접두사가 될 수 없음
+    if (is_prefix.length() > my_string.length()) {
+        return 0;  // 접두사가 일치하지 않으면 0 반환
+    }
+    
+    // my_string의 접두사를 is_prefix와 비교
+    if (my_string.substr(0, is_prefix.length()) == is_prefix) {
+        return 1;  // 접두사가 일치하면 1 반환
+    } else {
+        return 0;  // 접두사가 일치하지 않으면 0 반환
+    }
+}

@@ -1,0 +1,25 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(vector<vector<int>> board, int k) {
+    
+    // 최종 합 변수 초기화
+    int sum = 0;
+
+    // 2차원 배열의 크기 계산
+    int row_size = board.size();         // 행의 수
+    int col_size = board[0].size();      // 열의 수
+
+    // board를 순회하며 i + j <= k 인 경우 값을 더함
+    for (int i = 0; i < row_size; i++) {
+        for (int j = 0; j < col_size; j++) {
+            if (i + j <= k) {
+                sum += board[i][j];
+            }
+        }
+    }
+
+    return sum;  // 최종 합 반환
+}

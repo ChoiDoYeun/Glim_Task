@@ -1,0 +1,28 @@
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+int solution(int n, int k) {    // ex) n : 양꼬치 n인분, k : 음료수 k개
+
+    int price_per_meat = 12000;  // 양꼬치 1인분 가격
+    int price_per_drink = 2000;  // 음료수 1개 가격
+
+    int free_drinks = n / 10;  // 서비스 음료수 개수 (양꼬치 10인분마다 음료수 1개)
+
+    // 입력값이 제한사항을 벗어났을 경우 예외 처리
+    if (n <= 0 || n >= 1000) {
+        cout << "Error: n must be between 1 and 999." << endl;
+        return 1;  // 에러코드 반환
+    }
+
+    if (k < free_drinks || k >= 1000) { // 'n/10' -> free_drinks임으로 대체
+        cout << "Error: k must be at least n / 10 and less than 1000." << endl;
+        return 2;  // 에러코드 반환
+    }
+
+    int final_drinks = k - free_drinks; // 서비스 음료수를 뺀 최종 계산할 음료수 개수
+    int total_price = (n * price_per_meat) + (final_drinks * price_per_drink);  // 최종 가격
+
+    return total_price;
+}
